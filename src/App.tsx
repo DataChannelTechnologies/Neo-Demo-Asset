@@ -11,7 +11,13 @@ interface Message {
   chart?: React.ReactNode;
   id: string;
 }
-
+interface FollowUpQuestions {
+  [key: string]: {
+    responses: string;
+    chartData: any;
+    questions: string[];
+  };
+}
 function App() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [showInitialQuestions, setShowInitialQuestions] = useState(true);
@@ -41,7 +47,7 @@ function App() {
   ];
 
   // Remove the followUpQuestions object definition and use the imported data
-  const followUpQuestions = followUpQuestionsData;
+  const followUpQuestions : FollowUpQuestions = followUpQuestionsData;
   const handleQuestionClick = async (question: string) => {
     setLoading(true);
     setShowInitialQuestions(false);
@@ -61,9 +67,9 @@ function App() {
     
     const response: Message = {
       type: 'assistant',
-      content: <ReactMarkdown>{followUpQuestions[question]?.responses}</ReactMarkdown> ||
+      content: <ReactMarkdown >{followUpQuestions[question]?.responses}</ReactMarkdown> ||
         "Based on our analysis, we've seen significant growth in this area. Let me break down the key metrics for you.",
-      chart: <ReactECharts option={followUpQuestions[question]?.chartData} style={{ height: '400px' , width: '100%' }} />,
+      chart: <ReactECharts option={followUpQuestions[question]?.chartData}  opts={{renderer: 'svg'}}/>,
       id: (Date.now() + 1).toString()
     };
 
@@ -149,7 +155,7 @@ function App() {
                   <div className={`max-w-3xl ${message.type === 'user' ? 'bg-white' : 'bg-white'} rounded-lg p-4 shadow-sm border border-gray-100`}>
                     <p className="text-gray-700 whitespace-pre-wrap">{message.content}</p>
                     {message.chart && (
-                      <div className="mt-4 animate-fadeIn">
+                      <div className="mt-4 animate-fadeIn" style={{height : 400, width : '100%'}}>
                         <hr className="my-8" />
                         {message.chart}
                       </div>
