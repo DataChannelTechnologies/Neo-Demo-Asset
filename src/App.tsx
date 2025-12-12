@@ -3,8 +3,10 @@ import { ArrowUpRight } from 'lucide-react';
 import ReactECharts from 'echarts-for-react';
 import ReactMarkdown from 'react-markdown';
 import followUpQuestionsData from './data/followUpQuestions.json';
-import NeoIcon from './assets/askneo_icon.svg';
-
+import NeoIcon from './assets/neo-icon.png';
+import NeoIconChat from './assets/neo_icon_chat.png';
+import InteractNudge from './assets/interact_nudge.png';
+import UserIcon from './assets/USER.png';
 interface Message {
   type: 'user' | 'assistant';
   content: any;
@@ -100,16 +102,7 @@ function App() {
         <div className="border-b px-4 py-3 flex justify-between items-center flex-shrink-0">
           <div className="flex items-center gap-2">
             <div className="p-1.5 rounded">
-              <img src={NeoIcon} alt="Neo Icon"/>
-            </div>
-            <span className="font-semibold text-gray-800">Ask Neo</span>
-          </div>
-          <div className="relative">
-            <select className="appearance-none bg-gray-50 border border-gray-200 rounded-md px-4 py-2 pr-8 text-sm text-gray-600">
-              <option>Select Collection</option>
-            </select>
-            <div className="absolute right-3 top-1/2 -translate-y-1/2">
-              <ArrowUpRight size={16} className="text-gray-400" />
+              <img src={NeoIcon} alt="Neo Icon" className='h-16'/>
             </div>
           </div>
         </div>
@@ -120,9 +113,9 @@ function App() {
             {showInitialQuestions && (
               <div className="space-y-6 animate-fadeIn">
                 <div className="space-y-2">
-                  <h1 className="text-4xl font-light text-purple-400">Hi there !</h1>
+                  <h1 className="text-4xl font-light ">Hi there !</h1>
                   <h2 className="text-3xl font-light">
-                    Select a question to try <span className="text-orange-400">Ask Neo</span>
+                    Select a question to try <span >Ask Neo</span>
                   </h2>
                 </div>
                 
@@ -132,16 +125,39 @@ function App() {
                       key={i}
                       onClick={() => !loading && handleQuestionClick(q)}
                       disabled={loading}
-                      className="w-full text-left p-4 bg-white rounded-lg border border-gray-100 hover:border-orange-200 hover:shadow-md transition-all duration-300 flex justify-between items-center group disabled:opacity-50"
+                      className="w-full text-left p-4 bg-white rounded-lg border border-gray-100 hover:border-[#216FED] hover:shadow-md transition-all duration-300 flex justify-between items-center group disabled:opacity-50"
                     >
                       <span className="text-gray-700">{q}</span>
-                      <ArrowUpRight 
-                        size={18} 
-                        className="text-orange-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
-                      />
+                      <div className="text-white p-1 bg-[#216FED] hover:bg-[#282876] rounded-md transition-colors duration-300">
+                        <ArrowUpRight 
+                          size={18} 
+                        />
+                      </div>
                     </button>
                   ))}
                 </div>
+
+                <style>
+                  {`
+                    @keyframes float {
+                      0%, 100% {
+                        transform: translateY(0px);
+                      }
+                      50% {
+                        transform: translateY(-10px);
+                      }
+                    }
+                    .animate-float {
+                      animation: float 2s ease-in-out infinite;
+                    }
+                  `}
+                </style>
+
+                <img 
+                  src={InteractNudge} 
+                  alt="Interact nudge" 
+                  className="w-full max-w-md mx-auto animate-float" 
+                />
               </div>
             )}
 
@@ -150,8 +166,11 @@ function App() {
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'} animate-slideIn`}
+                  className={`flex items-start gap-3 ${message.type === 'user' ? 'justify-end' : 'justify-start'} animate-slideIn`}
                 >
+                  {message.type === 'assistant' && (
+                    <img src={NeoIconChat} alt="AI" className="h-8 w-8 rounded-md mt-1 flex-shrink-0" />
+                  )}
                   <div className={`max-w-3xl ${message.type === 'user' ? 'bg-white' : 'bg-white'} rounded-lg p-4 shadow-sm border border-gray-100`}>
                     <p className="text-gray-700 whitespace-pre-wrap">{message.content}</p>
                     {message.chart && (
@@ -161,6 +180,9 @@ function App() {
                       </div>
                     )}
                   </div>
+                  {message.type === 'user' && (
+                      <img src={UserIcon} alt="User" className="h-8 w-8 rounded-md mt-1 flex-shrink-0" />
+                  )}
                 </div>
               ))}
               
@@ -168,9 +190,9 @@ function App() {
                 <div className="flex justify-start animate-fadeIn">
                   <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
                     <div className="flex space-x-2">
-                      <div className="h-3 w-3 bg-orange-400 rounded-full animate-bounce"></div>
-                      <div className="h-3 w-3 bg-orange-400 rounded-full animate-bounce delay-200"></div>
-                      <div className="h-3 w-3 bg-orange-400 rounded-full animate-bounce delay-400"></div>
+                      <div className="h-3 w-3 bg-[#216FED] rounded-full animate-bounce"></div>
+                      <div className="h-3 w-3 bg-[#216FED] rounded-full animate-bounce delay-200"></div>
+                      <div className="h-3 w-3 bg-[#216FED] rounded-full animate-bounce delay-400"></div>
                     </div>
                   </div>
                 </div>
@@ -182,7 +204,7 @@ function App() {
             {showFollowUp && questionCount < 2 && messages.length > 0 && !loading && (
               <div className="space-y-3 animate-fadeIn mt-8" ref={suggestedQuestionsRef}>
                 <div className="flex items-center gap-2">
-                 <img src={NeoIcon} alt="Neo Icon" />
+                 <img src={NeoIconChat} alt="Neo Icon" className='h-8'/>
                   <span className="text-gray-600">Suggested Questions</span>
                 </div>
                 {getRelevantFollowUps(messages[messages.length - 2].content).map((q, i) => (
@@ -190,13 +212,14 @@ function App() {
                     key={i}
                     onClick={() => !loading && handleQuestionClick(q)}
                     disabled={loading}
-                    className="w-full text-left p-4 bg-white rounded-lg border border-gray-100 hover:border-orange-200 hover:shadow-md transition-all duration-300 flex justify-between items-center group disabled:opacity-50"
+                    className="w-full text-left p-4 bg-white rounded-lg border border-gray-100 hover:border-[#216FED] hover:shadow-md transition-all duration-300 flex justify-between items-center group disabled:opacity-50"
                   >
                     <span className="text-gray-700">{q}</span>
-                    <ArrowUpRight 
-                      size={18} 
-                      className="text-orange-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
-                    />
+                     <div className="text-white p-1 bg-[#216FED] hover:bg-[#282876] rounded-md transition-colors duration-300">
+                      <ArrowUpRight 
+                        size={18} 
+                      />
+                      </div>
                   </button>
                 ))}
               </div>
@@ -207,7 +230,7 @@ function App() {
               <div className="flex justify-center animate-fadeIn mt-8">
                 <button
                   onClick={handleRestart}
-                  className="px-6 py-3 bg-orange-400 text-white rounded-lg hover:bg-orange-500 transition-colors duration-300 hover:shadow-md"
+                  className="px-6 py-3 bg-[#216FED] text-white rounded-lg hover:bg-[#282876] transition-colors duration-300 hover:shadow-md"
                 >
                   Restart Chat
                 </button>
@@ -218,7 +241,7 @@ function App() {
 
         {/* Ask anything input */}
         <div className="p-4 border-t flex-shrink-0">
-          <button className="w-full text-left p-4 bg-white rounded-lg border border-gray-100 hover:border-orange-200 hover:shadow-md transition-all duration-300 flex justify-between items-center group">
+          <button className="w-full text-left p-4 bg-white rounded-lg border border-gray-100 cursor-not-allowed flex justify-between items-center group bg-gray-100">
             <span className="text-gray-400">Ask me anything about your Data</span>
           </button>
         </div>
