@@ -135,7 +135,7 @@ function App() {
     <div className="h-screen w-screen overflow-hidden bg-white flex font-plus-jakarta text-[#1f2937]">
 
       {/* SIDEBAR */}
-      <div className="w-[260px] bg-[#f4f6fa] border-r border-[#e5e7eb] flex flex-col">
+      <div className="hidden md:flex w-[260px] bg-[#f4f6fa] border-r border-[#e5e7eb] flex-col">
 
         {/* Logo */}
         <div className="h-[72px] px-5 flex items-center justify-between border-b border-[#dde3ec]">
@@ -269,11 +269,35 @@ function App() {
                         {q}
                       </span>
 
-                      <div className="h-10 w-10 rounded-xl border border-[#216FED] flex items-center justify-center text-[#216FED] group-hover:bg-[#216FED] group-hover:text-white transition">
+                      <div className="h-10 w-10 flex-shrink-0 rounded-xl border border-[#216FED] flex items-center justify-center text-[#216FED] group-hover:bg-[#216FED] group-hover:text-white transition">
                         <ArrowUpRight size={18} />
                       </div>
                     </button>
                   ))}
+                </div>
+                {/* Animated Neo Illustration */}
+                <div className="mt-10 flex justify-center">
+                  <style>
+                    {`
+                    @keyframes float {
+                      0%, 100% {
+                        transform: translateY(0px);
+                      }
+                      50% {
+                        transform: translateY(-10px);
+                      }
+                    }
+                    .animate-float {
+                      animation: float 2s ease-in-out infinite;
+                    }
+                  `}
+                  </style>
+
+                  <img
+                    src={InteractNudge}
+                    alt="Interact nudge"
+                    className="w-full max-w-md mx-auto animate-float"
+                  />
                 </div>
               </div>
             )}
@@ -357,8 +381,8 @@ function App() {
                           {q}
                         </span>
 
-                        <div className="h-10 w-10 rounded-xl border border-[#216FED] flex items-center justify-center text-[#216FED] group-hover:bg-[#216FED] group-hover:text-white transition">
-                          <ArrowUp size={18} />
+                        <div className="h-10 w-10 flex-shrink-0 rounded-xl border border-[#216FED] flex items-center justify-center text-[#216FED] group-hover:bg-[#216FED] group-hover:text-white transition">
+                          <ArrowUpRight size={18} />
                         </div>
                       </button>
                     ))}
@@ -388,7 +412,7 @@ function App() {
 
 
             {/* TEXTBOX */}
-            <div className="relative rounded-2xl border border-[#e5e7eb] bg-[#fafbfc] shadow-sm">
+            <div className="hidden md:block relative rounded-2xl border border-[#e5e7eb] bg-[#fafbfc] shadow-sm">
               <textarea
                 disabled
                 placeholder="Ask anything about your data..."
