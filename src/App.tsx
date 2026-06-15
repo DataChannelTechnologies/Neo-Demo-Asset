@@ -125,7 +125,7 @@ function App() {
   };
 
   return (
-    <div className="h-screen w-screen overflow-hidden bg-white flex font-plus-jakarta text-[#1f2937]">
+    <div className="h-screen w-screen overflow-hidden bg-white flex font-plus-jakarta text-[#1f2937] border border-[#dde3ec] box-border">
 
       {/* SIDEBAR */}
       <div className="hidden md:flex w-[260px] bg-[#f4f6fa] border-r border-[#e5e7eb] flex-col">
@@ -234,7 +234,7 @@ function App() {
         {/* CHAT AREA */}
         <div
           ref={chatAreaRef}
-          className={`flex-1 ${showInitialQuestions ? "flex flex-col justify-center overflow-hidden" : "overflow-y-auto"}`}
+          className={`flex-1 custom-scrollbar ${showInitialQuestions ? "flex flex-col justify-center overflow-hidden" : "overflow-y-auto"}`}
         >
           <div className={`max-w-3xl w-full mx-auto px-8 ${showInitialQuestions ? "flex-1 flex flex-col justify-center" : "py-20"}`}>
 
