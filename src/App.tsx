@@ -45,19 +45,12 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const suggestedQuestionsRef = useRef<HTMLDivElement>(null);
+  const chatAreaRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    if (suggestedQuestionsRef.current) {
-      setTimeout(() => {
-        suggestedQuestionsRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-        });
-      }, 100);
-    } else {
-      messagesEndRef.current?.scrollIntoView({
+    if (chatAreaRef.current) {
+      chatAreaRef.current.scrollTo({
+        top: chatAreaRef.current.scrollHeight,
         behavior: "smooth",
       });
     }
@@ -239,19 +232,22 @@ function App() {
       <div className="flex-1 flex flex-col relative">
 
         {/* CHAT AREA */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="max-w-3xl mx-auto px-8 py-20">
+        <div
+          ref={chatAreaRef}
+          className={`flex-1 ${showInitialQuestions ? "flex flex-col justify-center overflow-hidden" : "overflow-y-auto"}`}
+        >
+          <div className={`max-w-3xl w-full mx-auto px-8 ${showInitialQuestions ? "flex-1 flex flex-col justify-center" : "py-20"}`}>
 
             {/* EMPTY STATE */}
             {showInitialQuestions && (
-              <div className="max-w-2xl mx-auto">
+              <div className="max-w-2xl mx-auto w-full flex flex-col justify-center">
 
                 <div className="mb-10">
-                  <h1 className="text-[52px] leading-[58px] font-light tracking-tight">
+                  <h1 className="text-[42px] leading-[48px] font-light tracking-tight">
                     Hi there !
                   </h1>
 
-                  <h2 className="text-[42px] leading-[48px] font-light tracking-tight text-[#3f3f46] mt-2">
+                  <h2 className="text-[32px] leading-[42px] font-light tracking-tight text-[#3f3f46] mt-2">
                     Select a question to try Ask Neo
                   </h2>
                 </div>
@@ -303,50 +299,52 @@ function App() {
             )}
 
             {/* MESSAGES */}
-            <div className="space-y-8 mt-10">
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`flex gap-4 ${message.type === "user"
-                    ? "justify-end"
-                    : "justify-start"
-                    }`}
-                >
-                  {message.type === "assistant" && (
-                    <img
-                      src={NeoIconChat}
-                      alt="AI"
-                      className="h-9 w-9 rounded-lg flex-shrink-0 mt-1"
-                    />
-                  )}
-
+            {messages.length > 0 && (
+              <div className="space-y-8 mt-10">
+                {messages.map((message) => (
                   <div
-                    className={`max-w-3xl rounded-2xl px-5 py-4 border shadow-sm ${message.type === "user"
-                      ? "bg-[#216FED] text-white border-[#216FED]"
-                      : "bg-white border-[#eceef3]"
+                    key={message.id}
+                    className={`flex gap-4 ${message.type === "user"
+                      ? "justify-end"
+                      : "justify-start"
                       }`}
                   >
-                    <div className="text-[15px] leading-7">
-                      {message.content}
+                    {message.type === "assistant" && (
+                      <img
+                        src={NeoIconChat}
+                        alt="AI"
+                        className="h-9 w-9 rounded-lg flex-shrink-0 mt-1"
+                      />
+                    )}
+
+                    <div
+                      className={`max-w-3xl rounded-2xl px-5 py-4 border shadow-sm ${message.type === "user"
+                        ? "bg-[#216FED] text-white border-[#216FED]"
+                        : "bg-white border-[#eceef3]"
+                        }`}
+                    >
+                      <div className="text-[15px] leading-7">
+                        {message.content}
+                      </div>
+
+                      {message.chart && (
+                        <div className="mt-6 pt-6 border-t border-[#eef0f4]">
+                          {message.chart}
+                        </div>
+                      )}
                     </div>
 
-                    {message.chart && (
-                      <div className="mt-6 pt-6 border-t border-[#eef0f4]">
-                        {message.chart}
-                      </div>
+                    {message.type === "user" && (
+                      <img
+                        src={UserIcon}
+                        alt="User"
+                        className="h-9 w-9 rounded-lg flex-shrink-0 mt-1"
+                      />
                     )}
                   </div>
-
-                  {message.type === "user" && (
-                    <img
-                      src={UserIcon}
-                      alt="User"
-                      className="h-9 w-9 rounded-lg flex-shrink-0 mt-1"
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
 
             {/* FOLLOW UPS */}
             {showFollowUp &&
@@ -390,7 +388,6 @@ function App() {
                 </div>
               )}
 
-            <div ref={messagesEndRef} />
           </div>
         </div>
         {/* Restart */}
