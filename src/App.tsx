@@ -46,6 +46,15 @@ function App() {
   const [questionCount, setQuestionCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [svgLoaded, setSvgLoaded] = useState(false);
+
+  const svgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    if (svgRef.current && svgRef.current.complete) {
+      setSvgLoaded(true);
+    }
+  }, []);
 
   const chatAreaRef = useRef<HTMLDivElement>(null);
 
@@ -127,16 +136,28 @@ function App() {
   };
 
   return (
-    <div className="w-screen h-screen overflow-hidden bg-white flex flex-col items-center justify-center p-0 md:p-2 lg:p-4 relative">
+    <div className="w-screen h-screen overflow-hidden bg-white flex flex-col items-center justify-center p-0 md:p-2 lg:p-4 relative bg-[#FAFCFF]">
+
+      {/* Loading Overlay */}
+      {!svgLoaded && (
+        <div className="absolute inset-0 bg-white flex flex-col items-center justify-center z-50">
+          <div className="flex flex-col items-center gap-3">
+            <div className="h-10 w-10 border-4 border-[#216FED]/20 border-t-[#216FED] rounded-full animate-spin"></div>
+            <span className="text-sm font-medium text-gray-500 tracking-wide">Loading Ask Neo...</span>
+          </div>
+        </div>
+      )}
 
       {/* Mockup Container */}
-      <div className="w-full h-full md:relative md:aspect-[1455/939] md:w-[min(98vw,calc(98vh*1455/939))] md:h-[min(98vh,calc(98vw*939/1455))]">
+      <div className={`bg-[#FAFCFF] w-full h-full md:relative md:aspect-[1455/939] md:w-[min(98vw,calc(98vh*1455/939))] md:h-[min(98vh,calc(98vw*939/1455))] transition-opacity duration-300 ${svgLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <div className="relative w-full h-full">
           {/* Mockup SVG */}
           <img
+            ref={svgRef}
             src={SafariFrameSVG}
-            className="hidden md:block w-full h-full object-fill pointer-events-none select-none"
+            className="absolute opacity-0 pointer-events-none md:relative md:opacity-100 w-full h-full object-fill select-none"
             alt="Safari Browser Mockup"
+            onLoad={() => setSvgLoaded(true)}
           />
           {/* Embedded App viewport */}
           <div className="w-full h-full md:absolute md:overflow-hidden md:rounded-[4px] md:top-[7.74%] md:left-[1.16%] md:w-[97.63%] md:h-[90.06%]">
