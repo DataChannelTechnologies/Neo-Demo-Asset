@@ -279,11 +279,11 @@ function App() {
                       <div className="max-w-2xl mx-auto w-full flex flex-col justify-center">
 
                         <div className="mb-10">
-                          <h1 className="text-[42px] leading-[48px] font-light tracking-tight">
+                          <h1 className="text-[24px] leading-[28px] font-light tracking-tight">
                             Hi there !
                           </h1>
 
-                          <h2 className="text-[32px] leading-[42px] font-light tracking-tight text-[#3f3f46] mt-2">
+                          <h2 className="text-[18px] leading-[28px] font-light text-[#3f3f46] mt-2">
                             Select a question to try Ask Neo
                           </h2>
                         </div>
