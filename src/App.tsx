@@ -89,7 +89,7 @@ function App() {
   };
 
   return (
-    <div className="w-screen h-screen flex overflow-hidden bg-[#fafbfc] font-plus-jakarta text-slate-700 antialiased border border-2 border-slate-300 rounded-lg overflow-hidden">
+    <div className="w-screen h-screen flex overflow-hidden bg-[#fafbfc] font-plus-jakarta text-slate-700 antialiased">
       {/* BLUR GRADIENT OVERLAY */}
       {showOverlay && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/40 backdrop-blur-sm border border-white/20">
