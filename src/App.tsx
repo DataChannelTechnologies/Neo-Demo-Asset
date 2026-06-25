@@ -15,7 +15,7 @@ function App() {
   const [questionCount, setQuestionCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [showOverlay, setShowOverlay] = useState(true);
+  // const [showOverlay, setShowOverlay] = useState(true);
 
   const chatAreaRef = useRef<HTMLDivElement>(null);
 
@@ -91,7 +91,7 @@ function App() {
   return (
     <div className="w-screen h-screen flex overflow-hidden bg-[#fafbfc] font-plus-jakarta text-slate-700 antialiased">
       {/* BLUR GRADIENT OVERLAY */}
-      {showOverlay && (
+      {/* {showOverlay && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/40 backdrop-blur-sm border border-white/20">
           <button
             onClick={() => setShowOverlay(false)}
@@ -100,7 +100,7 @@ function App() {
             Interact with Neo
           </button>
         </div>
-      )}
+      )} */}
 
       {/* SIDEBAR */}
       <Sidebar sidebarOpen={sidebarOpen} />
