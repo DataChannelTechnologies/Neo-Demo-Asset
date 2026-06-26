@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { PanelLeft } from "lucide-react";
+import { PanelLeft, MousePointer2 } from "lucide-react";
 import ReactECharts from "echarts-for-react";
 import ReactMarkdown from "react-markdown";
 
@@ -89,49 +89,54 @@ function App() {
   };
 
   return (
-    <div className="w-screen h-screen flex overflow-hidden bg-[#fafbfc] font-plus-jakarta text-slate-700 antialiased">
-      {/* BLUR GRADIENT OVERLAY */}
-      {/* {showOverlay && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/40 backdrop-blur-sm border border-white/20">
-          <button
-            onClick={() => setShowOverlay(false)}
-            className="px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl shadow-2xl transition-all duration-300 hover:scale-105"
-          >
-            Interact with Neo
-          </button>
-        </div>
-      )} */}
+    <div className="w-screen h-screen flex flex-col items-start justify-center bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 font-plus-jakarta text-slate-700 antialiased p-4">
+      {/* Interactive Demo Button - Above Glass Frame */}
+      <button className="mb-4 flex items-center p-2 bg-white rounded-xl shadow-md border border-slate-200 text-slate-800 font-semibold text-sm">
+          <div className="flex items-center gap-2">
+            <div className="border border-slate-200 rounded-lg">
+            <div className="p-1 m-0.5 bg-blue-100 rounded-md border">
+              <MousePointer2 size={16} className="text-neo-blue" />
+            </div>
+            </div>
+            <p className="text-sm">Interactive Demo</p>
+          </div>
+        </button>
+      
+      {/* Glass Frame */}
+      <div className="w-full h-full bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-2xl overflow-hidden relative">
+        <div className="w-full h-full flex overflow-hidden">
+          {/* SIDEBAR */}
+          <Sidebar sidebarOpen={sidebarOpen} />
 
-      {/* SIDEBAR */}
-      <Sidebar sidebarOpen={sidebarOpen} />
+          {/* MAIN CONTENT AREA */}
+          <div className="flex-1 flex flex-col bg-[#fafbfc] overflow-hidden relative">
+            {/* Rounded top-left card container for chat workspace */}
+            <div className="flex-1 bg-white md:border-t md:border-l md:border-slate-300 md:rounded-tl-lg flex flex-col overflow-hidden relative">
+              {/* Sidebar Toggle Button (Only visible on Desktop, functional) */}
+              <button
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+                className="absolute top-4 left-4 z-30 p-2 rounded-lg hover:bg-slate-100 border border-slate-200 bg-white text-slate-600 transition shadow-sm items-center justify-center hidden md:flex cursor-pointer"
+                title="Toggle Sidebar"
+              >
+                <PanelLeft size={18} />
+              </button>
 
-      {/* MAIN CONTENT AREA */}
-      <div className="flex-1 flex flex-col bg-[#fafbfc] overflow-hidden relative">
-        {/* Rounded top-left card container for chat workspace */}
-        <div className="flex-1 bg-white md:border-t md:border-l md:border-slate-300 md:rounded-tl-lg flex flex-col overflow-hidden relative">
-          {/* Sidebar Toggle Button (Only visible on Desktop, functional) */}
-          <button
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="absolute top-4 left-4 z-30 p-2 rounded-lg hover:bg-slate-100 border border-slate-200 bg-white text-slate-600 transition shadow-sm items-center justify-center hidden md:flex cursor-pointer"
-            title="Toggle Sidebar"
-          >
-            <PanelLeft size={18} />
-          </button>
+              {/* CHAT VIEWPORT */}
+              <ChatArea
+                messages={messages}
+                loading={loading}
+                showFollowUp={showFollowUp}
+                questionCount={questionCount}
+                handleQuestionClick={handleQuestionClick}
+                handleRestart={handleRestart}
+                getRelevantFollowUps={getRelevantFollowUps}
+                chatAreaRef={chatAreaRef}
+              />
 
-          {/* CHAT VIEWPORT */}
-          <ChatArea
-            messages={messages}
-            loading={loading}
-            showFollowUp={showFollowUp}
-            questionCount={questionCount}
-            handleQuestionClick={handleQuestionClick}
-            handleRestart={handleRestart}
-            getRelevantFollowUps={getRelevantFollowUps}
-            chatAreaRef={chatAreaRef}
-          />
-
-          {/* Textbox input */}
-          <ChatInput />
+              {/* Textbox input */}
+              <ChatInput />
+            </div>
+          </div>
         </div>
       </div>
     </div>
