@@ -103,7 +103,15 @@ function App() {
         </button>
       
       {/* Glass Frame */}
-      <div className="w-full h-full bg-white/30 backdrop-blur-2xl rounded-2xl border border-white/40 shadow-2xl overflow-hidden relative">
+      <div 
+        className="w-full h-full backdrop-blur-2xl overflow-hidden relative"
+        style={{
+          borderRadius: '1.25419rem',
+          border: '1px solid rgba(23, 55, 211, 0.13)',
+          background: 'rgba(255, 255, 255, 0.43)',
+          boxShadow: '0 0 0 1.254px rgba(255, 255, 255, 0.20) inset, 0 10.034px 10.034px 0 rgba(17, 24, 39, 0.05), 0 20.067px 20.067px 0 rgba(17, 24, 39, 0.05), 0 40.134px 40.134px 0 rgba(17, 24, 39, 0.05)'
+        }}
+      >
         <div className="w-full h-full flex overflow-hidden">
           {/* SIDEBAR */}
           <Sidebar sidebarOpen={sidebarOpen} />
