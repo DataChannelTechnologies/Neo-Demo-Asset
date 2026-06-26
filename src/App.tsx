@@ -89,7 +89,7 @@ function App() {
   };
 
   return (
-    <div className="w-screen h-screen flex flex-col items-start justify-center bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 font-plus-jakarta text-slate-700 antialiased p-4">
+    <div className="w-screen h-screen flex flex-col items-start justify-center bg-[#fafbfc] font-plus-jakarta text-slate-700 antialiased p-4">
       {/* Interactive Demo Button - Above Glass Frame */}
       <button className="mb-4 flex items-center p-2 bg-white rounded-xl shadow-md border border-slate-200 text-slate-800 font-semibold text-sm">
           <div className="flex items-center gap-2">
@@ -103,7 +103,7 @@ function App() {
         </button>
       
       {/* Glass Frame */}
-      <div className="w-full h-full bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-2xl overflow-hidden relative">
+      <div className="w-full h-full bg-white/30 backdrop-blur-2xl rounded-2xl border border-white/40 shadow-2xl overflow-hidden relative">
         <div className="w-full h-full flex overflow-hidden">
           {/* SIDEBAR */}
           <Sidebar sidebarOpen={sidebarOpen} />
