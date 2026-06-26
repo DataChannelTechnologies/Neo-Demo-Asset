@@ -89,7 +89,7 @@ function App() {
   };
 
   return (
-    <div className="w-screen h-screen flex flex-col items-start justify-center bg-[#fafbfc] font-plus-jakarta text-slate-700 antialiased p-4">
+    <div className="w-screen h-screen flex flex-col items-start justify-center bg-transparent font-plus-jakarta text-slate-700 antialiased p-4">
       {/* Interactive Demo Button - Above Glass Frame */}
       <button className="mb-4 flex items-center p-2 bg-white rounded-xl shadow-md border border-slate-200 text-slate-800 font-semibold text-sm">
           <div className="flex items-center gap-2">
