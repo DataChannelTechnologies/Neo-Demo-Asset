@@ -38,7 +38,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
           <div className="flex flex-col justify-center py-6">
             <div className="mb-8 text-center md:text-left">
               <h1 className="text-[23px] font-bold text-slate-800 leading-tight">
-                Hi there !
+                Hi there!
               </h1>
               <h2 className="text-[14.5px] text-slate-500 mt-2">
                 Select a question to try Ask Neo
