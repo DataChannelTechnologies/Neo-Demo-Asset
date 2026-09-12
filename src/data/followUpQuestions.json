@@ -1,7 +1,7 @@
 {
   "What trends can be observed in the monetary value of conversions over the past year?": {
     "questions": [],
-    "responses": "### Insights on Conversion Value Trends\n\n1. **January 2024**: The total conversion value was approximately **$309,611,142.44**.\n2. **February 2024**: A slight increase to about **$313,313,917.76**.\n3. **March 2024**: Significant rise in conversion value to **$778,355,072.12**.\n4. **April 2024**: The value decreased to **$408,477,817.76**.\n5. **May 2024**: Another notable increase, reaching **$760,369,893.31**.\n6. **June 2024**: Conversion value was **$427,363,611.95**.\n7. **July 2024**: A decrease to **$305,140,897.93**.\n8. **August 2024**: The value increased again to **$371,615,330.62**.\n\nOverall, the data indicates fluctuations in the conversion value throughout the year, with peaks in March and May.",
+    "responses": "Conversion value fluctuated throughout 2024, peaking in **March ($778M)** and **May ($760M)**.",
     "chartData": {
       "tooltip": {
         "trigger": "axis",
@@ -102,7 +102,7 @@
       "What is the average conversion value for Google Ads in US ?",
       "What trends can be observed in the monetary value of conversions over the past year?"
     ],
-    "responses": "### Insights on Advertising Platform Performance\n\n1. **Facebook Ads** leads the pack with a total of **60,521,187** clicks, making it the top-performing advertising platform in terms of user engagement.\n2. **Google Ads** comes in second, garnering a substantial **19,880,107** clicks, indicating strong performance as well.\n3. **Amazon Ads** follows with **14,542,769** clicks, showcasing its effectiveness in attracting user interactions.\n4. **Flipkart Ads** received **2,281,959** clicks, which, while lower than the others, still demonstrates notable engagement.\n\nThese results highlight the varying levels of engagement across different platforms, with Facebook Ads significantly outperforming the others in terms of clicks.",
+    "responses": "**Facebook Ads** led with **60.5M clicks**, far ahead of Google, Amazon, and Flipkart Ads.",
     "chartData": {
       "tooltip": {
         "trigger": "item"
@@ -202,7 +202,7 @@
   },
   "What was my total spend on Ad platforms last year?": {
     "questions": [],
-    "responses": "### Total Spend on Ad Platforms in 2024\n\nIn the year **2024**, the total spend on various advertisement platforms was as follows:\n\n1. **Facebook Ads**: $146,649,863.62\n2. **Amazon Ads**: $142,666,776.53\n3. **Google Ads**: $52,581,641.76\n4. **Flipkart Ads**: $22,077,052.65\n\nThese figures highlight the significant investments made across these major platforms, with Facebook Ads leading the expenditure.",
+    "responses": "Total 2024 ad spend was led by **Facebook Ads ($146.6M)**, followed by Amazon, Google, and Flipkart Ads.",
     "chartData": {
       "xAxis": {
         "type": "value",
@@ -286,7 +286,7 @@
   },
   "What is the average conversion value for Google Ads in US ?": {
     "questions": [],
-    "responses": "### Insights: Average Conversion Value for Google Ads in India\n\nThe analysis of Google Ads performance in India during the period from January 2023 to August 2024 reveals that the **average conversion value** was **$110,852.42**. This figure provides a clear indication of the monetary value generated per conversion through Google Ads within the specified timeframe.",
+    "responses": "Google Ads averaged a conversion value of **$110,852.42** in India (Jan 2023–Aug 2024).",
     "chartData": {
       "graphic": {
         "elements": [
@@ -344,7 +344,7 @@
   },
   "What are my most ordered categories in August 2024?": {
     "questions": [],
-    "responses": "### Top Ordered Categories in August 2024\n\nIn August 2024, the following categories stood out as the most ordered:\n\n1. **Sunscreen**: With a total of **158,085** units ordered, Sunscreen was the top category.\n2. **FMDC**: Following closely, FMDC saw **147,525** units ordered.\n3. **Face Wash**: This category had a total of **132,816** units ordered.\n4. **Serums**: A popular choice with **42,937** units ordered.\n5. **Lip Balm & Lip Mask**: Garnered **37,007** orders.\n\nThese figures highlight the popularity of skincare products, particularly Sunscreen and FMDC, during this period.",
+    "responses": "**Sunscreen** led August 2024 orders with **158,085 units**, followed by FMDC and Face Wash.",
     "chartData": {
       "xAxis": {
         "type": "value",
@@ -446,7 +446,7 @@
   },
   "What was the total amount for sales recorded in the marketplace in august 2024?": {
     "questions": [],
-    "responses": "### August 2024 Marketplace Sales Insights\n\nThe total sales recorded in the marketplace for **August 2024** amounted to **$180,031,109.95**.",
+    "responses": "Marketplace sales in **August 2024** totaled **$180,031,109.95**.",
     "chartData": {
       "graphic": {
         "elements": [
@@ -504,7 +504,7 @@
   },
   "Can you analyze the sales performance of my online store versus my physical stores?": {
     "questions": [],
-    "responses": "### Insights on Sales Performance: Online vs. Physical Stores\n1. **Online Store (Sales Channel ID: 1002):** The online store generated a total revenue of **$1,304,981,463.61**, making it the top-performing sales channel.\n2. **Physical Store 1 (Sales Channel ID: 1001):** This physical store achieved a total revenue of **$828,587,047.02**, placing it as the second highest in sales performance.\n3. **Physical Store 2 (Sales Channel ID: 1003):** This store contributed a total revenue of **$554,615,391.00**.\n4. **Physical Store 3 (Sales Channel ID: 1004):** The third physical store generated a total revenue of **$261,803,029.81**.\nThe analysis highlights that the online store significantly outperforms the physical stores in terms of revenue, indicating a strong preference or higher sales volume through the online channel.",
+    "responses": "The **online store** led with **$1.3B** in revenue, outperforming all three physical stores.",
     "chartData": {
       "tooltip": {
         "trigger": "item"
@@ -608,7 +608,7 @@
       "What are my most ordered categories in August 2024?",
       "What was the total amount for sales recorded in the marketplace in august 2024?"
     ],
-    "responses": "### Top 7 Cities for Orders Shipped to California in 2024\n\nHere are the key insights from the analysis of orders shipped to California in 2024:\n\n1. **Los Angeles** leads with a combined total of **154,037** orders (including case variations).\n2. **Fresno** follows with **78,834** orders.\n3. **San Francisco** has a combined total of **112,734** orders (including case variations).\n4. **San Diego** has **16,513** orders, making it a significant contributor.\n5. **Sacramento** has a combined total of **28,444** orders (including case variations).\n6. **San Jose** contributes with **11,952** orders.\n7. **Oakland** rounds out the list with **11,466** orders.\n\nThe results highlight the need to address data consistency issues, particularly with city names, to ensure accurate reporting and analysis. Multiple entries for the same city with different capitalizations have been combined in this analysis.",
+    "responses": "**Los Angeles** led California shipments with **154,037 orders**, followed by San Francisco and Fresno.",
     "chartData": {
       "xAxis": {
         "type": "value",

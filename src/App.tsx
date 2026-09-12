@@ -4,10 +4,13 @@ import ReactECharts from "echarts-for-react";
 import ReactMarkdown from "react-markdown";
 
 import followUpQuestionsData from "./data/followUpQuestions.json";
+import { storyboards } from "./data/storyboards";
 import { Message, FollowUpQuestions } from "./types/chat";
-import { Sidebar } from "./components/Sidebar";
+import { Sidebar, SidebarView } from "./components/Sidebar";
 import { ChatArea } from "./components/ChatArea";
 import { ChatInput } from "./components/ChatInput";
+import { StoryboardsList } from "./components/storyboards/StoryboardsList";
+import { StoryboardDetail } from "./components/storyboards/StoryboardDetail";
 
 function App() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -15,6 +18,8 @@ function App() {
   const [questionCount, setQuestionCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [activeView, setActiveView] = useState<SidebarView>("chat");
+  const [activeStoryboardId, setActiveStoryboardId] = useState<string | null>(null);
   // const [showOverlay, setShowOverlay] = useState(true);
 
   const chatAreaRef = useRef<HTMLDivElement>(null);
@@ -88,6 +93,18 @@ function App() {
     setShowFollowUp(false);
   };
 
+  const handleNavigate = (view: SidebarView) => {
+    setActiveView(view);
+    setActiveStoryboardId(null);
+  };
+
+  const handlePinToStoryboard = () => {
+    setActiveView("storyboards");
+    setActiveStoryboardId(null);
+  };
+
+  const activeStoryboard = storyboards.find((sb) => sb.id === activeStoryboardId);
+
   return (
     <div className="w-screen h-screen flex flex-col items-start justify-center bg-transparent font-plus-jakarta text-slate-700 antialiased p-4">
       {/* Interactive Demo Button - Above Glass Frame */}
@@ -115,7 +132,7 @@ function App() {
       >
         <div className="w-full h-full flex overflow-hidden">
           {/* SIDEBAR */}
-          <Sidebar sidebarOpen={sidebarOpen} />
+          <Sidebar sidebarOpen={sidebarOpen} activeView={activeView} onNavigate={handleNavigate} />
 
           {/* MAIN CONTENT AREA */}
           <div className="flex-1 flex flex-col bg-[#fafbfc] overflow-hidden relative">
@@ -130,20 +147,35 @@ function App() {
                 <PanelLeft size={18} />
               </button>
 
-              {/* CHAT VIEWPORT */}
-              <ChatArea
-                messages={messages}
-                loading={loading}
-                showFollowUp={showFollowUp}
-                questionCount={questionCount}
-                handleQuestionClick={handleQuestionClick}
-                handleRestart={handleRestart}
-                getRelevantFollowUps={getRelevantFollowUps}
-                chatAreaRef={chatAreaRef}
-              />
+              {activeView === "chat" && (
+                <>
+                  {/* CHAT VIEWPORT */}
+                  <ChatArea
+                    messages={messages}
+                    loading={loading}
+                    showFollowUp={showFollowUp}
+                    questionCount={questionCount}
+                    handleQuestionClick={handleQuestionClick}
+                    handleRestart={handleRestart}
+                    getRelevantFollowUps={getRelevantFollowUps}
+                    chatAreaRef={chatAreaRef}
+                    onPinToStoryboard={handlePinToStoryboard}
+                  />
 
-              {/* Textbox input */}
-              <ChatInput />
+                  {/* Textbox input */}
+                  <ChatInput />
+                </>
+              )}
+
+              {activeView === "storyboards" &&
+                (activeStoryboard ? (
+                  <StoryboardDetail
+                    storyboard={activeStoryboard}
+                    onBack={() => setActiveStoryboardId(null)}
+                  />
+                ) : (
+                  <StoryboardsList storyboards={storyboards} onOpen={setActiveStoryboardId} />
+                ))}
             </div>
           </div>
         </div>

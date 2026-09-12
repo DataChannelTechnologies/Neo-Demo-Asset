@@ -1,5 +1,5 @@
-import React from "react";
-import { ArrowUpRight, RotateCcw } from "lucide-react";
+import React, { useState } from "react";
+import { ArrowUpRight, RotateCcw, Pin, Check, ThumbsUp, ThumbsDown, Copy } from "lucide-react";
 import { Message } from "../types/chat";
 import NeoIconChat from "../assets/neo_icon_chat.png";
 import InteractNudge from "../assets/interact_nudge.png";
@@ -14,6 +14,7 @@ interface ChatAreaProps {
   handleRestart: () => void;
   getRelevantFollowUps: (question: string) => string[];
   chatAreaRef: React.RefObject<HTMLDivElement>;
+  onPinToStoryboard: () => void;
 }
 
 const initialQuestions = [
@@ -30,7 +31,22 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
   handleRestart,
   getRelevantFollowUps,
   chatAreaRef,
+  onPinToStoryboard,
 }) => {
+  const [pinnedId, setPinnedId] = useState<string | null>(null);
+  const [hasPinnedOnce, setHasPinnedOnce] = useState(false);
+
+  const handlePinClick = (messageId: string) => {
+    setHasPinnedOnce(true);
+    setPinnedId(messageId);
+    setTimeout(() => {
+      onPinToStoryboard();
+      setPinnedId(null);
+    }, 700);
+  };
+
+  const lastAssistantId = [...messages].reverse().find((m) => m.type === "assistant")?.id;
+
   return (
     <div ref={chatAreaRef} className="flex-1 overflow-y-auto px-8 pt-16 pb-8 custom-scrollbar bg-white">
       <div className="max-w-4xl mx-auto w-full space-y-6">
@@ -118,6 +134,61 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
                   {message.chart && (
                     <div className="mt-4 pt-4 border-t border-slate-200">
                       {message.chart}
+                    </div>
+                  )}
+
+                  {message.type === "assistant" && (
+                    <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between">
+                      <div className="flex items-center gap-3 text-slate-400">
+                        <button className="hover:text-slate-600 transition cursor-default">
+                          <ThumbsUp size={14} />
+                        </button>
+                        <button className="hover:text-slate-600 transition cursor-default">
+                          <ThumbsDown size={14} />
+                        </button>
+                        <button className="hover:text-slate-600 transition cursor-default">
+                          <RotateCcw size={14} />
+                        </button>
+                        <button className="hover:text-slate-600 transition cursor-default">
+                          <Copy size={14} />
+                        </button>
+                      </div>
+
+                      <div className="relative inline-block">
+                        {!hasPinnedOnce && message.id === lastAssistantId && (
+                          <>
+                            <span className="absolute inset-0 rounded-md bg-neo-blue/40 animate-ping pointer-events-none" />
+                            <div className="absolute -top-9 right-0 whitespace-nowrap animate-bounce pointer-events-none">
+                              <span className="relative bg-neo-blue text-white text-[10.5px] font-semibold px-2.5 py-1 rounded-full shadow-md">
+                                Try pinning this!
+                                <span className="absolute left-1/2 -bottom-1 -translate-x-1/2 h-2 w-2 rotate-45 bg-neo-blue" />
+                              </span>
+                            </div>
+                          </>
+                        )}
+
+                        <button
+                          onClick={() => handlePinClick(message.id)}
+                          disabled={pinnedId !== null}
+                          className={`relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border text-[11px] font-semibold transition ${
+                            pinnedId === message.id
+                              ? "border-emerald-200 bg-emerald-50 text-emerald-600"
+                              : "border-slate-200 text-slate-600 hover:border-neo-blue hover:text-neo-blue"
+                          }`}
+                        >
+                          {pinnedId === message.id ? (
+                            <>
+                              <Check size={12} />
+                              Pinned
+                            </>
+                          ) : (
+                            <>
+                              <Pin size={12} />
+                              Pin to storyboard
+                            </>
+                          )}
+                        </button>
+                      </div>
                     </div>
                   )}
                 </div>
