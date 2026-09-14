@@ -68,14 +68,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, activeView, onNav
         <div className="h-[1px] bg-slate-200 my-1"></div>
       </div>
 
-      {/* Start New Thread Button (Custom OKLCH blue) */}
-      <div className="px-3 py-2 flex-shrink-0">
-        <button className="w-full flex items-center justify-center gap-1.5 py-2.5 rounded-md bg-neo-blue hover:bg-neo-blue-hover text-white text-[12.5px] font-semibold shadow-sm transition-all cursor-default">
-          <Plus size={15} />
-          Start New Thread
-        </button>
-      </div>
-
       {/* Threads Section */}
       <div className="flex-1 px-4 py-3 flex flex-col overflow-hidden">
         <p className="text-[10.5px] font-bold text-slate-500 uppercase tracking-wider mb-2.5">

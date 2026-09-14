@@ -61,7 +61,7 @@ function App() {
       <ReactECharts
         option={followUpQuestions[question]?.chartData}
         opts={{ renderer: "svg" }}
-        style={{ height: "320px", width: "100%" }}
+        style={{ height: "210px", width: "100%" }}
       />
     ) : undefined;
 
@@ -120,8 +120,8 @@ function App() {
         </button>
       
       {/* Glass Frame */}
-      <div 
-        className="w-full h-full overflow-hidden relative"
+      <div
+        className="w-full h-full overflow-hidden relative flex flex-col"
         style={{
           borderRadius: '1.25419rem',
           border: '1px solid rgba(23, 55, 211, 0.13)',
@@ -130,7 +130,14 @@ function App() {
           boxShadow: '0 0 0 1.254px rgba(255, 255, 255, 0.20) inset, 0 40.134px 40.134px 0 rgba(17, 24, 39, 0.05)'
         }}
       >
-        <div className="w-full h-full flex overflow-hidden">
+        {/* macOS Title Bar with Traffic Lights */}
+        <div className="flex items-center gap-2 px-4 py-3 shrink-0">
+          <span className="w-3 h-3 rounded-full bg-[#ff5f57] border border-black/10" />
+          <span className="w-3 h-3 rounded-full bg-[#febc2e] border border-black/10" />
+          <span className="w-3 h-3 rounded-full bg-[#28c840] border border-black/10" />
+        </div>
+
+        <div className="w-full flex-1 flex overflow-hidden">
           {/* SIDEBAR */}
           <Sidebar sidebarOpen={sidebarOpen} activeView={activeView} onNavigate={handleNavigate} />
 

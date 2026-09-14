@@ -3,7 +3,7 @@ import { Sliders, Sparkles, ArrowUp } from "lucide-react";
 
 export const ChatInput: React.FC = () => {
   return (
-    <div className="bg-white px-6 py-6 flex-shrink-0">
+    <div className="bg-white px-6 pt-1 pb-6 flex-shrink-0">
       <div className="max-w-4xl mx-auto">
         <div className="rounded-2xl border border-slate-300 bg-[#fafbfc] p-3.5 shadow-sm flex flex-col gap-2">
           {/* Textarea */}

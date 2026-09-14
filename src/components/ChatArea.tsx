@@ -48,8 +48,8 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
   const lastAssistantId = [...messages].reverse().find((m) => m.type === "assistant")?.id;
 
   return (
-    <div ref={chatAreaRef} className="flex-1 overflow-y-auto px-8 pt-16 pb-8 custom-scrollbar bg-white">
-      <div className="max-w-4xl mx-auto w-full space-y-6">
+    <div ref={chatAreaRef} className="flex-1 overflow-y-auto px-8 pt-16 pb-2 custom-scrollbar bg-white">
+      <div className="max-w-4xl mx-auto w-full">
         {messages.length === 0 ? (
           <div className="flex flex-col justify-center py-6">
             <div className="mb-8 text-center md:text-left">
@@ -110,7 +110,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
             {messages.map((message) => (
               <div
                 key={message.id}
-                className={`flex gap-4 ${message.type === "user" ? "justify-end" : "justify-start"}`}
+                className={`flex gap-3 ${message.type === "user" ? "justify-end" : "justify-start"}`}
               >
                 {message.type === "assistant" && (
                   <img
@@ -121,18 +121,18 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
                 )}
 
                 <div
-                  className={`max-w-[85%] rounded-xl px-4 py-3 border shadow-sm ${
+                  className={`max-w-[80%] rounded-xl px-4 py-3 border shadow-sm ${
                     message.type === "user"
                       ? "bg-neo-blue text-white border-neo-blue"
                       : "bg-white border-slate-200 text-slate-800"
                   }`}
                 >
-                  <div className="text-[13.5px] leading-relaxed whitespace-pre-wrap">
+                  <div className="text-[13px] leading-relaxed whitespace-pre-wrap">
                     {message.content}
                   </div>
 
                   {message.chart && (
-                    <div className="mt-4 pt-4 border-t border-slate-200">
+                    <div className="mt-3.5 pt-3.5 border-t border-slate-200">
                       {message.chart}
                     </div>
                   )}
@@ -141,16 +141,16 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
                     <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between">
                       <div className="flex items-center gap-3 text-slate-400">
                         <button className="hover:text-slate-600 transition cursor-default">
-                          <ThumbsUp size={14} />
+                          <ThumbsUp size={13.5} />
                         </button>
                         <button className="hover:text-slate-600 transition cursor-default">
-                          <ThumbsDown size={14} />
+                          <ThumbsDown size={13.5} />
                         </button>
                         <button className="hover:text-slate-600 transition cursor-default">
-                          <RotateCcw size={14} />
+                          <RotateCcw size={13.5} />
                         </button>
                         <button className="hover:text-slate-600 transition cursor-default">
-                          <Copy size={14} />
+                          <Copy size={13.5} />
                         </button>
                       </div>
 
@@ -210,33 +210,34 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
           questionCount < 2 &&
           messages.length > 0 &&
           !loading && (
-            <div className="mt-6 py-5">
-              <div className="flex items-center gap-1.5 mb-3">
+            <div className="mt-5">
+              <div className="flex items-center gap-1.5 mb-2">
                 <img
                   src={NeoIconChat}
                   alt="Neo Icon"
-                  className="h-8 w-8 object-contain"
+                  className="h-5 w-5 object-contain"
                 />
-                <span className="text-[12px] font-medium text-slate-500">
+                <span className="text-[11px] font-medium text-slate-500">
                   Suggested Questions
                 </span>
               </div>
 
-              <div className="space-y-1.5">
+              <div className="flex flex-wrap gap-1.5">
                 {getRelevantFollowUps(
                   messages[messages.length - 2].content
                 ).map((q, i) => (
                   <button
                     key={i}
                     onClick={() => !loading && handleQuestionClick(q)}
-                    className="w-full flex items-center justify-between rounded-lg border border-slate-200 bg-white hover:border-neo-blue transition px-5 py-3 text-left group"
+                    className="flex items-center gap-1.5 rounded-2xl border border-slate-200 bg-white hover:border-neo-blue hover:bg-blue-50/40 transition px-4 py-2 text-left group"
                   >
-                    <span className="text-[12.5px] font-medium text-slate-700 group-hover:text-slate-900">
+                    <span className="text-[11.5px] font-medium leading-snug text-slate-700 group-hover:text-slate-900">
                       {q}
                     </span>
-                    <div className="h-7 w-7 flex-shrink-0 rounded-md border border-slate-200 flex items-center justify-center text-neo-blue group-hover:bg-neo-blue group-hover:text-white group-hover:border-neo-blue transition-all">
-                      <ArrowUpRight size={14} />
-                    </div>
+                    <ArrowUpRight
+                      size={11}
+                      className="flex-shrink-0 text-neo-blue"
+                    />
                   </button>
                 ))}
               </div>
@@ -245,7 +246,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
 
         {/* Typing loader */}
         {loading && (
-          <div className="flex gap-4 justify-start">
+          <div className="mt-6 flex gap-4 justify-start">
             <img
               src={NeoIconChat}
               alt="AI Avatar"
@@ -261,7 +262,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
 
         {/* Restart */}
         {questionCount >= 2 && !loading && (
-          <div className="flex justify-center pt-3">
+          <div className="mt-6 flex justify-center pt-3">
             <button
               onClick={handleRestart}
               className="flex items-center gap-1.5 px-3 py-2 rounded-md bg-neo-blue hover:bg-neo-blue-hover text-white text-[12.5px] font-medium transition shadow-sm"
